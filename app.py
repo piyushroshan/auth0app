@@ -44,12 +44,24 @@ def callback():
         'name': userinfo['name'],
         'picture': userinfo['picture']
     }
-    return redirect('/')
+    return redirect('/profile')
 
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect('/')
+    return redirect('/profile')
+
+@app.route('/api/profile')
+def api_profile():
+    if 'profile' not in session:
+        return jsonify({'error': 'Unauthorized'}), 401
+    return jsonify(session['profile'])
+
+@app.route('/profile')
+def profile():
+    if 'profile' not in session:
+        return redirect('/profile')
+    return render_template('profile.html', profile=session['profile'])
 
 if __name__ == '__main__':
     import os
