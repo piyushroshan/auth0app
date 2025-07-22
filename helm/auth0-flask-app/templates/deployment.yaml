@@ -29,5 +29,7 @@ spec:
               value: "{{ .Values.env.AUTH0_CLIENT_SECRET }}"
             - name: SECRET_KEY
               value: "{{ .Values.env.SECRET_KEY }}"
+            - name: AUTH0_CALLBACK_URL
+              value: "{{ .Values.env.AUTH0_CALLBACK_URL }}"
           resources:
             {{- toYaml .Values.resources | nindent 12 }}

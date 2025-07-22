@@ -28,8 +28,8 @@ def home():
 
 @app.route('/login')
 def login():
-    redirect_uri = url_for('callback', _external=True)
-    return auth0.authorize_redirect(redirect_uri)
+    callback_url = os.getenv('AUTH0_CALLBACK_URL') or url_for('callback', _external=True)
+    return auth0.authorize_redirect(callback_url)
 
 @app.route('/callback')
 def callback():
