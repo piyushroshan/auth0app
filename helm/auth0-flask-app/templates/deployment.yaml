@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "auth0-flask-app.fullname" . }}
+  labels:
+    app: {{ include "auth0-flask-app.name" . }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "auth0-flask-app.name" . }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "auth0-flask-app.name" . }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 5000
+          env:
+            - name: AUTH0_DOMAIN
+              value: "{{ .Values.env.AUTH0_DOMAIN }}"
+            - name: AUTH0_CLIENT_ID
+              value: "{{ .Values.env.AUTH0_CLIENT_ID }}"
+            - name: AUTH0_CLIENT_SECRET
+              value: "{{ .Values.env.AUTH0_CLIENT_SECRET }}"
+            - name: SECRET_KEY
+              value: "{{ .Values.env.SECRET_KEY }}"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

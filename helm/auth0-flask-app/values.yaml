@@ -1,0 +1,19 @@
+replicaCount: 1
+
+image:
+  repository: auth0-flask-app
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 5000
+
+env:
+  AUTH0_DOMAIN: "your-domain.auth0.com"
+  AUTH0_CLIENT_ID: "your-client-id"
+  AUTH0_CLIENT_SECRET: "your-client-secret"
+  SECRET_KEY: "your-secret-key"
+
+resources: {}
+
