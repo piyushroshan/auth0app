@@ -6,8 +6,12 @@ image:
   pullPolicy: IfNotPresent
 
 service:
+  # Supported types: ClusterIP, LoadBalancer
   type: ClusterIP
   port: 5000
+  # Set to true to also create a LoadBalancer service
+  createLoadBalancer: false
+  loadBalancerPort: 5555
 
 env:
   AUTH0_DOMAIN: "your-domain.auth0.com"

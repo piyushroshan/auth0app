@@ -1,0 +1,17 @@
+{{- if .Values.service.createLoadBalancer }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "auth0-flask-app.fullname" . }}-lb
+  labels:
+    app: {{ include "auth0-flask-app.name" . }}
+spec:
+  type: LoadBalancer
+  ports:
+    - port: {{ .Values.service.loadBalancerPort }}
+      targetPort: 5000
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ include "auth0-flask-app.name" . }}
+{{- end }}
