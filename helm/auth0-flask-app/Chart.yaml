@@ -1,5 +1,5 @@
 apiVersion: v2
-name: auth0-flask-app
+name: auth0app
 description: A Helm chart for deploying the Auth0 Flask OAuth app
 version: 0.1.0
 appVersion: "1.0.0"
