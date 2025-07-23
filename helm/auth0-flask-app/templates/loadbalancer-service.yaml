@@ -12,6 +12,9 @@ spec:
       targetPort: 5000
       protocol: TCP
       name: http
+{{- if .Values.service.nodePort }}
+      nodePort: {{ .Values.service.nodePort }}
+{{- end }}
   selector:
     app: {{ include "auth0-flask-app.name" . }}
 {{- end }}
