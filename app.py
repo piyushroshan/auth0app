@@ -82,7 +82,7 @@ def login():
     origin = request.url_root.rstrip('/')
     callback_url = f"{origin}/callback"
     # if AUTH0_CALLBACK_URL is set, use it instead of the default
-    if os.getenv('AUTH0_CALLBACK_URL')
+    if os.getenv('AUTH0_CALLBACK_URL'):
         callback_url = os.getenv('AUTH0_CALLBACK_URL')
     return auth0.authorize_redirect(callback_url)
 
