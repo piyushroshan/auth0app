@@ -18,8 +18,16 @@
                 <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
             </div>
         {% else %}
-            <a href="{{ url_for('login') }}" class="btn btn-primary">Login with Auth0</a>
+            <div id="login-content">
+                <p><a href="{{ url_for('login') }}" class="btn btn-primary">Login with Auth0</a></p>
+            </div>
         {% endif %}
     </div>
+    <script>
+    // If JWT exists, redirect to /profile automatically
+    if (localStorage.getItem('id_token')) {
+        window.location.href = '/profile';
+    }
+    </script>
 </body>
 </html>
